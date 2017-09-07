@@ -1,4 +1,20 @@
+<?
+$url = "counter.dat";//Указываем адрес файла с данными для записи
+$file = file($url);//Считываем файл в массив
+$count = $file[0];//Первая строчка - наши данные, в php отсчет начинается с нуля
+$count++;//Увеличиваем значение счетчика на 1
+$handle = fopen($url, "w");//Открываем файл для записи
+fwrite($handle, $count);//Записываем
+fclose($handle);//Закрываем 
 
+$a = $count % 10;
+
+$b = $count % 100;
+if ($a <= 4 and $a != 1 and $a != 0){
+  $type = 0;
+}
+else $type = 1;
+?>
 
 <!doctype html>
 <html>
@@ -81,7 +97,7 @@
         </p>
       </section>
       <footer>
-        <p><small>Вас тут не стояло</small></p>
+        <p><small>Вас тут не стояло <?echo $count; if ($type == 0) { echo " раза"; } else echo " раз"; ?></small></p>
         <p>Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
       </footer>
     </div>
